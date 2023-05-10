@@ -1,83 +1,93 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
-const Login = () => {
+
+const SignUp = () => {
     const navigate=useNavigate();
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+    const [confirmPassword,setConfirmPassword]=useState('')
     
     const onSubmit=()=>{
         
     }
     return (
-    <>
-      <section className="bg-[#F4F7FF] py-20 lg:py-[100px]">
-        <div className="container mx-auto">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div
-                className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
-              >
-                <div className="mb-10 text-center md:mb-16">
+        <section class="bg-[#F4F7FF] py-20 lg:py-[80px]">
+        <div class="container mx-auto">
+            <div class="-mx-4 flex flex-wrap">
+            <div class="w-full px-4">
+                <div
+                class="relative =mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
+                >
+                <div class="mb-10 text-center md:mb-16">
                     <img
-                    className="w-24 inline-block max-w-[160px]"
-                      src={logo1}
-                      alt="logo"
+                    class="w-24 inline-block max-w-[160px]"
+                    src={logo1}
+                    alt="logo"
                     />
                 </div>
                 <form>
-                  <div className="mb-6">
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e)=>setEmail(e.target.value)}
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-6">
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e)=>setPassword(e.target.value)}
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-10">
+                    <div class="mb-6">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                            class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                        />
+                    </div>
+                    <div class="mb-6">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                        />
+                    </div>
+                    <div class="mb-6">
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
+                            class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                        />
+                    </div>
+                    <div class="mb-10">
                     <button
-                      type="submit"
-                      className="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
+                        type="submit"
+                        class="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
                     >Sign In</button>
-                  </div>
+                    </div>
                 </form>
-                <p className="mb-6 text-base text-[#adadad]">Connect With</p>
-                <ul className="-mx-2 mb-12 flex justify-between">
-                  <li className="w-full px-2">
-                    <Link
-                      href="."
-                      className="flex h-11 items-center justify-center rounded-md bg-[#4064AC] hover:bg-opacity-90"
+                <p class="mb-6 text-base text-[#adadad]">Connect With</p>
+                <ul class="-mx-2 mb-12 flex justify-between">
+                    <li class="w-full px-2">
+                    <a
+                        href="."
+                        class="flex h-11 items-center justify-center rounded-md bg-[#4064AC] hover:bg-opacity-90"
                     >
-                      <svg
+                        <svg
                         width="10"
                         height="20"
                         viewBox="0 0 10 20"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                      >
+                        >
                         <path
-                          d="M9.29878 8H7.74898H7.19548V7.35484V5.35484V4.70968H7.74898H8.91133C9.21575 4.70968 9.46483 4.45161 9.46483 4.06452V0.645161C9.46483 0.290323 9.24343 0 8.91133 0H6.89106C4.70474 0 3.18262 1.80645 3.18262 4.48387V7.29032V7.93548H2.62912H0.747223C0.359774 7.93548 0 8.29032 0 8.80645V11.129C0 11.5806 0.304424 12 0.747223 12H2.57377H3.12727V12.6452V19.129C3.12727 19.5806 3.43169 20 3.87449 20H6.47593C6.64198 20 6.78036 19.9032 6.89106 19.7742C7.00176 19.6452 7.08478 19.4194 7.08478 19.2258V12.6774V12.0323H7.66596H8.91133C9.2711 12.0323 9.54785 11.7742 9.6032 11.3871V11.3548V11.3226L9.99065 9.09677C10.0183 8.87097 9.99065 8.6129 9.8246 8.35484C9.76925 8.19355 9.52018 8.03226 9.29878 8Z"
-                          fill="white"
+                            d="M9.29878 8H7.74898H7.19548V7.35484V5.35484V4.70968H7.74898H8.91133C9.21575 4.70968 9.46483 4.45161 9.46483 4.06452V0.645161C9.46483 0.290323 9.24343 0 8.91133 0H6.89106C4.70474 0 3.18262 1.80645 3.18262 4.48387V7.29032V7.93548H2.62912H0.747223C0.359774 7.93548 0 8.29032 0 8.80645V11.129C0 11.5806 0.304424 12 0.747223 12H2.57377H3.12727V12.6452V19.129C3.12727 19.5806 3.43169 20 3.87449 20H6.47593C6.64198 20 6.78036 19.9032 6.89106 19.7742C7.00176 19.6452 7.08478 19.4194 7.08478 19.2258V12.6774V12.0323H7.66596H8.91133C9.2711 12.0323 9.54785 11.7742 9.6032 11.3871V11.3548V11.3226L9.99065 9.09677C10.0183 8.87097 9.99065 8.6129 9.8246 8.35484C9.76925 8.19355 9.52018 8.03226 9.29878 8Z"
+                            fill="white"
                         />
-                      </svg>
-                    </Link>
-                  </li>
-                  <li className="w-full px-2">
-                    <Link
-                      href="."
-                      className="flex h-11 items-center justify-center rounded-md bg-[#1C9CEA] hover:bg-opacity-90"
+                        </svg>
+                    </a>
+                    </li>
+                    <li class="w-full px-2">
+                    <a
+                        href="."
+                        class="flex h-11 items-center justify-center rounded-md bg-[#1C9CEA] hover:bg-opacity-90"
                     >
-                      <svg
+                        <svg
                         width="22"
                         height="16"
                         viewBox="0 0 22 16"
@@ -89,12 +99,12 @@ const Login = () => {
                           fill="white"
                         />
                       </svg>
-                    </Link>
+                    </a>
                   </li>
-                  <li className="w-full px-2">
-                    <Link
+                  <li class="w-full px-2">
+                    <a
                       href="."
-                      className="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
+                      class="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
                     >
                       <svg
                         width="18"
@@ -108,23 +118,18 @@ const Login = () => {
                           fill="white"
                         />
                       </svg>
-                    </Link>
+                    </a>
                   </li>
                 </ul>
-                <Link
-                  href="."
-                  className="mb-2 inline-block text-base text-[#adadad] hover:text-primary hover:underline"
-                >
-                  Forget Password?
-                </Link>
-                <p className="text-base text-[#adadad]">
-                  Not a member yet?
-                  <Link to='/signup' className="text-blue-600 hover:underline ml-2 font-bold">
-                    Sign Up
-                  </Link>
+                
+                <p class="text-base text-[#adadad]">
+                  Have account? 
+                  <a href="." class="text-blue-600 hover:underline ml-2 font-bold">
+                    Sign In
+                  </a>
                 </p>
                 <div>
-                  <span className="absolute top-1 right-1">
+                  <span class="absolute top-1 right-1">
                     <svg
                       width="40"
                       height="40"
@@ -246,7 +251,7 @@ const Login = () => {
                       />
                     </svg>
                   </span>
-                  <span className="absolute left-1 bottom-1">
+                  <span class="absolute left-1 bottom-1">
                     <svg
                       width="29"
                       height="40"
@@ -346,8 +351,7 @@ const Login = () => {
           </div>
         </div>
       </section>
-    </>
     )
 }
 
-export default Login
+export default SignUp
