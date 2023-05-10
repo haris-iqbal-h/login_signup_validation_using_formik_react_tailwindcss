@@ -48,6 +48,11 @@ const Login = () => {
     return errors;
   };
 
+  const handleSubmit=()=>{
+    console.log("values :", values);
+    navigate('/signup')
+  }
+
     return (
     <>
       <section className="bg-[#F4F7FF] py-20 lg:py-[100px]">
@@ -65,12 +70,11 @@ const Login = () => {
                     />
                 </div>
                 <Formik
-                  initialValues={{ email: "", password: "" }}
+                  initialValues={values}
+                  validate={(values) => validate(values)}
+                  validationSchema={loginSchema}
                   onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                      console.log("Logging in", values);
-                      setSubmitting(false);
-                    }, 500);
+                    handleSubmit(values, setSubmitting);
                   }}
                 >
                   {props => {
