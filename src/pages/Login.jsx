@@ -1,14 +1,53 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
+import { Formik } from "formik";
+import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
+import * as yup from "yup"; // used when validating with a pre-built solution
+
 const Login = () => {
     const navigate=useNavigate();
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+
+    const values = {
+      email: "",
+      password: "",
+    };
+
+    const [error, setError] = useState({
+      email: "",
+      password: "",
+    });
+    const loginSchema = yup.object().shape({
+      email: yup.string().email(),
+      password: yup.string().required("No password provided.")
+      .min(8, "Password is too short - should be 8 chars minimum.")
+      .matches(/(?=.*[0-9])/, "Password must contain a number.")
+    });
     
     const onSubmit=()=>{
         
     }
+    const validate = (values) => {
+    const errors = {};
+    console.log("values validate :", values);
+    if (!values.email) {
+      errors.email = "required";
+    } else if (!EmailValidator.validate(values.email)) {
+      errors.email = "Invalid email address.";
+    }
+    const passwordRegex = /(?=.*[0-9])/;
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 8) {
+      errors.password = "Password must be 8 characters long.";
+    } else if (!passwordRegex.test(values.password)) {
+      errors.password = "Invalid password. Must contain one number.";
+    }
+    return errors;
+  };
+
     return (
     <>
       <section className="bg-[#F4F7FF] py-20 lg:py-[100px]">
@@ -25,32 +64,56 @@ const Login = () => {
                       alt="logo"
                     />
                 </div>
-                <form>
-                  <div className="mb-6">
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e)=>setEmail(e.target.value)}
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-6">
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e)=>setPassword(e.target.value)}
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-10">
-                    <button
-                      type="submit"
-                      className="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
-                    >Sign In</button>
-                  </div>
-                </form>
+                <Formik
+                  initialValues={{ email: "", password: "" }}
+                  onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                      console.log("Logging in", values);
+                      setSubmitting(false);
+                    }, 500);
+                  }}
+                >
+                  {props => {
+                    const {
+                      values,
+                      touched,
+                      errors,
+                      isSubmitting,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit
+                    } = props;
+
+                    return (
+                      <form onSubmit={handleSubmit}>
+                        <div className="mb-6">
+                          <input
+                            type="email"
+                            placeholder="Email"
+                            value={values.email}
+                            onChange={handleChange}
+                            className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <input
+                            type="password"
+                            placeholder="Password"
+                            value={values.password}
+                            onChange={handleChange}
+                            className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                          />
+                        </div>
+                        <div className="mb-10">
+                          <button
+                            type="submit"
+                            className="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
+                          >Sign In</button>
+                        </div>
+                      </form>
+                    );
+                  }}
+                  </Formik>
                 <p className="mb-6 text-base text-[#adadad]">Connect With</p>
                 <ul className="-mx-2 mb-12 flex justify-between">
                   <li className="w-full px-2">

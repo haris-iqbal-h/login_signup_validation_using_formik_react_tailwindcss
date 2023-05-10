@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
 
+
 const SignUp = () => {
     const navigate=useNavigate();
     const [email,setEmail]=useState('')
