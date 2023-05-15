@@ -26,26 +26,11 @@ const Login = () => {
       .matches(/(?=.*[0-9])/, "Password must contain a number.")
     });
     
-    const onSubmit=()=>{
+    const onSubmit=()=>{ 
         
     }
     const validate = (values) => {
-    const errors = {};
-    console.log("values validate :", values);
-    if (!values.email) {
-      errors.email = "required";
-    } else if (!EmailValidator.validate(values.email)) {
-      errors.email = "Invalid email address.";
-    }
-    const passwordRegex = /(?=.*[0-9])/;
-    if (!values.password) {
-      errors.password = "Required";
-    } else if (values.password.length < 8) {
-      errors.password = "Password must be 8 characters long.";
-    } else if (!passwordRegex.test(values.password)) {
-      errors.password = "Invalid password. Must contain one number.";
-    }
-    return errors;
+    
   };
 
   const handleSubmit=()=>{
