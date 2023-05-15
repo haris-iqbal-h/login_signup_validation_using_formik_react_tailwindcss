@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
+import {useFormik} from 'formik'
 
 
 const SignUp = () => {
     const navigate=useNavigate();
+
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [confirmPassword,setConfirmPassword]=useState('')
+
+
+    useFormik({
+      initialValues:{
+        email:'',
+        password:'',
+        confirmPassword:''
+      }
+        })
     
     const onSubmit=()=>{
         
@@ -31,9 +42,10 @@ const SignUp = () => {
                     <div class="mb-6">
                         <input
                             type="email"
+                            name="email"
                             placeholder="Email"
-                            value={email}
-                            onChange={(e)=>setEmail(e.target.value)}
+                            // value={email}
+                            // onChange={(e)=>setEmail(e.target.value)}
                             class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                         />
                     </div>
@@ -41,8 +53,9 @@ const SignUp = () => {
                         <input
                             type="password"
                             placeholder="Password"
-                            value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
+                            name='password'
+                            // value={password}
+                            // onChange={(e)=>setPassword(e.target.value)}
                             class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                         />
                     </div>
@@ -50,8 +63,9 @@ const SignUp = () => {
                         <input
                             type="password"
                             placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e)=>setConfirmPassword(e.target.value)}
+                            name="confirm_password"
+                            // value={confirmPassword}
+                            // onChange={(e)=>setConfirmPassword(e.target.value)}
                             class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
                         />
                     </div>
