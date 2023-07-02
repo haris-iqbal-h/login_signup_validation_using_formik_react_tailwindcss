@@ -1,42 +1,30 @@
 import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
-import { Formik } from "formik";
-import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
-import * as yup from "yup"; // used when validating with a pre-built solution
+import { useFormik } from "formik";
+import { useNavigate } from 'react-router-dom';
+import * as Yup from "yup"; // used when validating with a pre-built solution
 
 const Login = () => {
-    const navigate=useNavigate();
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
+  const navigate=useNavigate()
 
-    const values = {
-      email: "",
-      password: "",
-    };
-
-    const [error, setError] = useState({
-      email: "",
-      password: "",
-    });
-    const loginSchema = yup.object().shape({
-      email: yup.string().email(),
-      password: yup.string().required("No password provided.")
-      .min(8, "Password is too short - should be 8 chars minimum.")
-      .matches(/(?=.*[0-9])/, "Password must contain a number.")
-    });
+    const formik=useFormik({
+      initialValues:{
+        email: "",
+        password: "",
+      },
+      validationSchema: Yup.object({
+        email: Yup.string().email("Invalid Email").required("Email Address is required"),
+        password: Yup.string().required("Password Address is required")
+        .min(8, "Password is too short - should be 8 chars minimum.")
+        .matches(/(?=.*[0-9])/, "Password must contain a number.")
+      }),
+      onSubmit:(values) => {
+        console.log(values);
+        navigate("/home")
+      }
+    })
     
-    const onSubmit=()=>{ 
-        
-    }
-    const validate = (values) => {
-    
-  };
-
-  const handleSubmit=(values,props)=>{
-    console.log("values :", values);
-    // navigate('/signup')
-  }
 
     return (
     <>
@@ -54,43 +42,44 @@ const Login = () => {
                       alt="logo"
                     />
                 </div>
-                <Formik
-                  initialValues={values}
-                  validate={(values) => validate(values)}
-                  validationSchema={loginSchema}
-                  onSubmit={(values, { setSubmitting }) => {
-                    handleSubmit(values, setSubmitting);  
-                  }}
-                >
-                  {props => {
-                    
-
-                    return (
-                      <form onSubmit={handleSubmit}>
-                        <div className="mb-6">
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                          />
-                        </div>
-                        <div className="mb-6">
-                          <input
-                            type="password"
-                            placeholder="Password"
-                            className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                          />
-                        </div>
-                        <div className="mb-10">
-                          <button
-                            type="submit"
-                            className="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
-                          >Sign In</button>
-                        </div>
-                      </form>
-                    );
-                  }}
-                  </Formik>
+                <form onSubmit={formik.handleSubmit}>
+                  <div className="mb-6">
+                    <input
+                      type="text"
+                      name='email'
+                      placeholder="Email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                    />
+                    {
+                      formik.touched.email && formik.errors.email ? 
+                        <div className="error_msg">{formik.errors.email}</div> : null
+                    }
+                  </div>
+                  <div className="mb-6">
+                    <input
+                      type="password"
+                      name='password'
+                      placeholder="Password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
+                    />
+                    {
+                      formik.touched.password && formik.errors.password ? 
+                        <div className="error_msg">{formik.errors.password}</div> : null
+                    }
+                  </div>
+                  <div className="mb-10">
+                    <button
+                      type="submit"
+                      className="bg-blue-600 font-bold w-full cursor-pointer rounded-md border py-3 px-5 text-base text-white transition hover:bg-opacity-90"
+                    >Sign In</button>
+                  </div>
+                </form> 
                 <p className="mb-6 text-base text-[#adadad]">Connect With</p>
                 <ul className="-mx-2 mb-12 flex justify-between">
                   <li className="w-full px-2">
