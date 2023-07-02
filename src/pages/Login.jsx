@@ -1,29 +1,26 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import logo1 from '../assets/images/login.gif'
 import { useFormik } from "formik";
-import { useNavigate } from 'react-router-dom';
-import * as Yup from "yup"; // used when validating with a pre-built solution
+import * as Yup from "yup";
 
 const Login = () => {
   const navigate=useNavigate()
 
-    const formik=useFormik({
-      initialValues:{
-        email: "",
-        password: "",
-      },
-      validationSchema: Yup.object({
-        email: Yup.string().email("Invalid Email").required("Email Address is required"),
-        password: Yup.string().required("Password Address is required")
-        .min(8, "Password is too short - should be 8 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number.")
-      }),
-      onSubmit:(values) => {
-        console.log(values);
-        navigate("/home")
-      }
-    })
+  const formik=useFormik({
+    initialValues:{
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid Email").required("Email Address is required"),
+      password: Yup.string().required("Password Address is required")
+    }),
+    onSubmit:(values) => {
+      console.log(values);
+      navigate("/home")
+    }
+  })
     
 
     return (
@@ -73,6 +70,7 @@ const Login = () => {
                         <div className="error_msg">{formik.errors.password}</div> : null
                     }
                   </div>
+                  
                   <div className="mb-10">
                     <button
                       type="submit"
