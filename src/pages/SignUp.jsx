@@ -17,8 +17,11 @@ const SignUp = () => {
         email:'',
         password:'',
         confirmPassword:''
+      },
+      onSubmit:(values)=>{
+        console.log(values);
       }
-        })
+    })
     
     const onSubmit=()=>{
         
