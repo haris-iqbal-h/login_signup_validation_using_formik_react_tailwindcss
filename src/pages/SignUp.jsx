@@ -29,7 +29,7 @@ const SignUp = () => {
 
   return (
     <>
-      <section className="bg-[#F4F7FF] py-20 lg:py-[100px]">
+      <section className="bg-[#F4F7FF] py-20 lg:py-[50px] h-screen">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
@@ -56,7 +56,7 @@ const SignUp = () => {
                     />
                     {
                       formik.touched.email && formik.errors.email ? 
-                        <div className="error_msg">{formik.errors.email}</div> : null
+                        <div className="mt-2 text-xs text-red-600 dark:text-red-400">{formik.errors.email}</div> : null
                     }
                   </div>
                   <div className="mb-6">
@@ -71,7 +71,7 @@ const SignUp = () => {
                     />
                     {
                       formik.touched.password && formik.errors.password ? 
-                        <div className="error_msg">{formik.errors.password}</div> : null
+                        <div className="mt-2 text-xs text-red-600 dark:text-red-400">{formik.errors.password}</div> : null
                     }
                   </div>
                   <div className="mb-6">
@@ -86,7 +86,7 @@ const SignUp = () => {
                     />
                     {
                       formik.touched.confirm_password && formik.errors.confirm_password ? 
-                        <div className="error_msg">{formik.errors.confirm_password}</div> : null
+                        <div className="mt-2 text-xs text-red-600 dark:text-red-400">{formik.errors.confirm_password}</div> : null
                     }
                   </div>
                   <div className="mb-10">
